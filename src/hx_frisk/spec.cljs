@@ -15,7 +15,7 @@
 
 (hx/defnc SpecView [{:keys [errors]}]
   (let [mangled (<-frisk-errors "spec-errors" errors)]
-    [Root (:data mangled) "spec-errors" (:state mangled)]))
+    [Root {:data (:data mangled) :id "spec-errors" :state-atom (:state mangled)}]))
 
 (hx/defnc SpecTitleView [{:keys [errors title] :as args}]
   [:div {:style {:background-color "white"
