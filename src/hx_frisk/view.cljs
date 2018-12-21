@@ -400,31 +400,30 @@
 (hx/defnc DataFriskView [{:keys [ data ] }]
   (let [expand-by-default (reduce #(assoc-in %1 [:data-frisk %2 :metadata-paths [] :expanded?] true) {} (range (count data)))
         state-atom (<-state expand-by-default)]
-    (fn [& data]
-      (let [data-frisk (:data-frisk @state-atom)
-            visible? (:visible? data-frisk)]
-        [:div {:style (merge {:flex-flow "row nowrap"
-                              :transition "all 0.3s ease-out"
-                              :z-index "5"}
-                             (when-not visible?
-                               {:overflow-x "hide"
-                                :overflow-y "hide"
-                                :max-height "30px"
-                                :max-width "100px"})
-                             (:shell styles))}
-         [VisibilityButton {:visible visible?
-                            :update-fn (fn [_] (swap! state-atom assoc-in [:data-frisk :visible?] (not visible?)))}]
-         [:span "Data frisk"]
-         (when visible?
-           [:div {:style {:padding "10px"
-                          ;; TODO Make the max height and width adjustable
-                          ;:max-height "400px"
-                          ;:max-width "800px"
-                          :resize "both"
-                          :box-sizing "border-box"
-                          :overflow-x "auto"
-                          :overflow-y "auto"}}
-            (map-indexed (fn [id x]
-                           ^{:key id} [Root {:data x
-                                             :id id
-                                             :state-atom state-atom }]) data)])]))))
+    (let [data-frisk (:data-frisk @state-atom)
+          visible? (:visible? data-frisk)]
+      [:div {:style (merge {:flex-flow "row nowrap"
+                            :transition "all 0.3s ease-out"
+                            :z-index "5"}
+                           (when-not visible?
+                             {:overflow-x "hide"
+                              :overflow-y "hide"
+                              :max-height "30px"
+                              :max-width "100px"})
+                           (:shell styles))}
+       [VisibilityButton {:visible visible?
+                          :update-fn (fn [_] (swap! state-atom assoc-in [:data-frisk :visible?] (not visible?)))}]
+       [:span "Data frisk"]
+       (when visible?
+         [:div {:style {:padding "10px"
+                        ;; TODO Make the max height and width adjustable
+                                        ;:max-height "400px"
+                                        ;:max-width "800px"
+                        :resize "both"
+                        :box-sizing "border-box"
+                        :overflow-x "auto"
+                        :overflow-y "auto"}}
+          (map-indexed (fn [id x]
+                         ^{:key id} [Root {:data x
+                                           :id id
+                                           :state-atom state-atom }]) data)])])))
