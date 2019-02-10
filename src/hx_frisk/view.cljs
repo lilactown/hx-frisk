@@ -1,7 +1,7 @@
 (ns hx-frisk.view
   (:require [cljs.pprint :refer [pprint]]
             [hx.react :as hx]
-            [hx.react.hooks :refer [<-state]]
+            [hx.hooks :refer [<-state]]
             [hx-frisk.util :as u]))
 
 (declare DataFrisk)
