@@ -1,7 +1,7 @@
 (ns hx-frisk.shell
   (:require [hx-frisk.view :as view]
             [hx.react :as hx]
-            [hx.react.hooks :refer [<-state]]))
+            [hx.hooks :refer [<-state]]))
 
 (def styles
   {:shell {:backgroundColor "#FAFAFA"
