@@ -1,7 +1,7 @@
 (ns datafrisk.spec
   (:require [hx-frisk.view :refer [Root]]
             [hx.react :as hx]
-            [hx.react.hooks :refer [<-state]))
+            [hx.react.hooks :refer [<-state]]))
 
 (defn spec-problem->metadata-path [{:keys [in path pred val via]}]
   [in {:error (str "(not "
